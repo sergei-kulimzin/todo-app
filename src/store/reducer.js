@@ -19,10 +19,14 @@ const initialValue = {
 export const reducer = (state = initialValue, { type, payload }) => {
   switch (type) {
     case types.CREATE_TODO_LIST:
-      const newTodoList = payload.todoList;
-      const newTodoLists = [...state.todoLists, newTodoList];
-      const newState = { ...state, todoLists: newTodoLists };
-      return newState;
+      const createTodoList = () => {
+        const newTodoList = payload.todoList;
+        const newTodoLists = [...state.todoLists, newTodoList];
+        const newState = { ...state, todoLists: newTodoLists };
+        return newState;
+      };
+      return createTodoList();
+
     default:
       return state;
   }

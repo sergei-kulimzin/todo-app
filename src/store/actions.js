@@ -14,3 +14,8 @@ export const addTodoListItem = (payload) => ({
   type: types.ADD_TODO_LIST_ITEM,
   payload,
 });
+
+export const removeTodoListItem = (payload) => ({
+  type: types.REMOVE_TODO_LIST_ITEM,
+  payload,
+});

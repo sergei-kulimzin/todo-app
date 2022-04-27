@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addTodoListItem } from '../../store/actions';
+import { addTodoListItem, removeTodoListItem } from '../../store/actions';
 import uniqid from 'uniqid';
 
 function EditTodoListPage() {
@@ -39,12 +39,30 @@ function EditTodoListPage() {
     setInputValue('');
   };
 
+  const handleRemoveTodoListItem = (id) => {
+    dispatch(
+      removeTodoListItem({
+        todoListID,
+        itemID: id,
+      })
+    );
+  };
+
   const renderTodoList = () => {
     if (todoList.items.length) {
       return (
         <ul>
           {todoList.items.map((todoListItem) => {
-            return <li key={todoListItem.id}>{todoListItem.text}</li>;
+            return (
+              <li key={todoListItem.id}>
+                {todoListItem.text}
+                <button
+                  onClick={() => handleRemoveTodoListItem(todoListItem.id)}
+                >
+                  remove
+                </button>
+              </li>
+            );
           })}
         </ul>
       );

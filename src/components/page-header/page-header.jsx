@@ -28,7 +28,7 @@ function PageHeader() {
     setIsNavMenuShown(false);
   };
 
-  const navListRender = () => {
+  const renderNavList = () => {
     if (navLinks.length) {
       return navLinks.map((navLink) => (
         <NavLink

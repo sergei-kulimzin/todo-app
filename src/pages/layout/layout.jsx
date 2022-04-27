@@ -5,7 +5,7 @@ function Layout() {
   return (
     <>
       <PageHeader />
-      <main>
+      <main className='py-5'>
         <Outlet />
       </main>
     </>

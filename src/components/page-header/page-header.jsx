@@ -63,7 +63,7 @@ function PageHeader() {
               <Offcanvas.Title className='text-secondary'>Menu</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav>{navListRender()}</Nav>
+              <Nav>{renderNavList()}</Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Navbar>

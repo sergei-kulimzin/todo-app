@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import uniqid from 'uniqid';
+import { createTodoList } from '../../store/actions';
 
 function CreateTodoListPage() {
   const [inputValue, setInputValue] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleChangeInputValue = (event) => {
     const { target } = event;
@@ -12,7 +17,16 @@ function CreateTodoListPage() {
     event.preventDefault();
     const cleanInputValue = inputValue.trim().toLowerCase();
     if (cleanInputValue) {
-      console.log(cleanInputValue);
+      const todoList = {
+        id: uniqid('todo-list-id-'),
+        text: cleanInputValue,
+        items: [],
+      };
+      dispatch(
+        createTodoList({
+          todoList,
+        })
+      );
     }
     setInputValue('');
   };

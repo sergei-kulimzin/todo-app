@@ -37,6 +37,25 @@ export const reducer = (state = initialValue, { type, payload }) => {
       };
       return removeTodoList();
 
+    case types.ADD_TODO_LIST_ITEM:
+      const addTodoListItem = () => {
+        const currentTodolist = state.todoLists.find(
+          (todolist) => todolist.id === payload.todoListID
+        );
+        const newItems = [...currentTodolist.items, payload.item];
+        const newTodoList = { ...currentTodolist, items: newItems };
+        const newTodoLists = state.todoLists.map((todoList) => {
+          if (todoList.id === payload.todoListID) {
+            return newTodoList;
+          } else {
+            return todoList;
+          }
+        });
+        const newState = { ...state, todoLists: newTodoLists };
+        return newState;
+      };
+      return addTodoListItem();
+
     default:
       return state;
   }

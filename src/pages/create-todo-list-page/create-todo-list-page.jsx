@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
@@ -6,6 +7,8 @@ import { createTodoList } from '../../store/actions';
 
 function CreateTodoListPage() {
   const [inputValue, setInputValue] = useState('');
+
+  const inputRef = useRef();
 
   const dispatch = useDispatch();
 
@@ -36,17 +39,39 @@ function CreateTodoListPage() {
     setInputValue('');
   };
 
+  const setInputFocus = () => {
+    inputRef.current.focus();
+  };
+
+  useEffect(setInputFocus, []);
+
   return (
     <>
-      <h1>Create todo list</h1>
-      <form onSubmit={handleSubmitForm}>
-        <input
-          type='text'
-          value={inputValue}
-          onChange={handleChangeInputValue}
-        />
-        <button type='submit'>create</button>
-      </form>
+      <Container>
+        <h1 className='text-center mb-5'>Create todo list</h1>
+        <Form
+          onSubmit={handleSubmitForm}
+          className='d-flex flex-column align-items-center'
+        >
+          <Form.Control
+            className='mb-3'
+            type='text'
+            placeholder='Enter name for the new todo list'
+            size='lg'
+            ref={inputRef}
+            value={inputValue}
+            onChange={handleChangeInputValue}
+          />
+          <Button
+            className='text-uppercase'
+            type='submit'
+            variant='primary'
+            size='lg'
+          >
+            create
+          </Button>
+        </Form>
+      </Container>
     </>
   );
 }

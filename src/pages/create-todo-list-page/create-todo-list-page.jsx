@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
 import { createTodoList } from '../../store/actions';
 
@@ -7,6 +8,8 @@ function CreateTodoListPage() {
   const [inputValue, setInputValue] = useState('');
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleChangeInputValue = (event) => {
     const { target } = event;
@@ -16,9 +19,10 @@ function CreateTodoListPage() {
   const handleSubmitForm = (event) => {
     event.preventDefault();
     const cleanInputValue = inputValue.trim().toLowerCase();
+    const todoListID = uniqid('todo-list-id-');
     if (cleanInputValue) {
       const todoList = {
-        id: uniqid('todo-list-id-'),
+        id: todoListID,
         text: cleanInputValue,
         items: [],
       };
@@ -27,6 +31,7 @@ function CreateTodoListPage() {
           todoList,
         })
       );
+      navigate(`/edit-todo-list/${todoListID}`);
     }
     setInputValue('');
   };

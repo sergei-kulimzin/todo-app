@@ -1,4 +1,7 @@
-import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
+import { BsClipboardCheck } from 'react-icons/bs';
 import uniqid from 'uniqid';
 
 const navLinks = [
@@ -15,25 +18,56 @@ const navLinks = [
 ];
 
 function PageHeader() {
+  const [isNavMenuShown, setIsNavMenuShown] = useState(false);
+
+  const handleShowNavMenu = () => {
+    setIsNavMenuShown(true);
+  };
+
+  const handleHideNavMenu = () => {
+    setIsNavMenuShown(false);
+  };
+
   const navListRender = () => {
     if (navLinks.length) {
-      return (
-        <ul>
-          {navLinks.map((navLink) => (
-            <li key={navLink.id}>
-              <NavLink to={navLink.href}>{navLink.content}</NavLink>
-            </li>
-          ))}
-        </ul>
-      );
+      return navLinks.map((navLink) => (
+        <NavLink
+          key={navLink.id}
+          className='nav-link link-light fs-3'
+          to={navLink.href}
+          onClick={handleHideNavMenu}
+        >
+          {navLink.content}
+        </NavLink>
+      ));
     } else {
       return null;
     }
   };
 
   return (
-    <header>
-      <nav>{navListRender()}</nav>
+    <header className='bg-dark'>
+      <Container fluid='md'>
+        <Navbar expand={false} variant='dark' bg='dark'>
+          <Link to='/'>
+            <BsClipboardCheck className='text-light fs-1' />
+          </Link>
+          <Navbar.Toggle onClick={handleShowNavMenu} />
+          <Navbar.Offcanvas
+            className='bg-dark'
+            placement='end'
+            show={isNavMenuShown}
+            onHide={handleHideNavMenu}
+          >
+            <Offcanvas.Header closeButton closeVariant='white'>
+              <Offcanvas.Title className='text-secondary'>Menu</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav>{navListRender()}</Nav>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Navbar>
+      </Container>
     </header>
   );
 }

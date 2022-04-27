@@ -27,6 +27,16 @@ export const reducer = (state = initialValue, { type, payload }) => {
       };
       return createTodoList();
 
+    case types.REMOVE_TODO_LIST:
+      const removeTodoList = () => {
+        const newTodoLists = state.todoLists.filter(
+          (todolist) => todolist.id !== payload.id
+        );
+        const newState = { ...state, todoLists: newTodoLists };
+        return newState;
+      };
+      return removeTodoList();
+
     default:
       return state;
   }

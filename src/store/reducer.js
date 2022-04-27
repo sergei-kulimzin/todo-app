@@ -77,6 +77,35 @@ export const reducer = (state = initialValue, { type, payload }) => {
       };
       return removeTodoListItem();
 
+    case types.EDIT_TODO_LIST_ITEM:
+      const editTodoListItem = () => {
+        const currentTodolist = state.todoLists.find(
+          (todolist) => todolist.id === payload.todoListID
+        );
+        const currentItem = currentTodolist.items.find(
+          (item) => item.id === payload.itemID
+        );
+        const newItem = { ...currentItem, text: payload.text };
+        const newItems = currentTodolist.items.map((item) => {
+          if (item.id === payload.itemID) {
+            return newItem;
+          } else {
+            return item;
+          }
+        });
+        const newTodoList = { ...currentTodolist, items: newItems };
+        const newTodoLists = state.todoLists.map((todoList) => {
+          if (todoList.id === payload.todoListID) {
+            return newTodoList;
+          } else {
+            return todoList;
+          }
+        });
+        const newState = { ...state, todoLists: newTodoLists };
+        return newState;
+      };
+      return editTodoListItem();
+
     default:
       return state;
   }

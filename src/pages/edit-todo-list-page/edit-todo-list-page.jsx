@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addTodoListItem, removeTodoListItem } from '../../store/actions';
 import uniqid from 'uniqid';
 
 function EditTodoListPage() {
   const { todoListID } = useParams();
+
+  const navigate = useNavigate();
 
   const todoList = useSelector((state) => {
     return state.todoLists.find((todoList) => todoList.id === todoListID);
@@ -48,6 +50,10 @@ function EditTodoListPage() {
     );
   };
 
+  const handleEditTodoListItem = (id) => {
+    navigate(`/edit-todo-list-item/${todoListID}/${id}`);
+  };
+
   const renderTodoList = () => {
     if (todoList.items.length) {
       return (
@@ -56,6 +62,9 @@ function EditTodoListPage() {
             return (
               <li key={todoListItem.id}>
                 {todoListItem.text}
+                <button onClick={() => handleEditTodoListItem(todoListItem.id)}>
+                  edit
+                </button>
                 <button
                   onClick={() => handleRemoveTodoListItem(todoListItem.id)}
                 >

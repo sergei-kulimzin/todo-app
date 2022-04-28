@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Button, ButtonGroup, Container, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { editTodoListItem } from '../../store/actions';
@@ -19,6 +20,8 @@ function EditTodoListItemPage() {
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState(todoListItem.text);
+
+  const inputRef = useRef();
 
   const handleChangeInputValue = (event) => {
     const { target } = event;
@@ -45,20 +48,43 @@ function EditTodoListItemPage() {
     navigate(`/edit-todo-list/${todoListID}`);
   };
 
+  const setInputFocus = () => {
+    inputRef.current.focus();
+  };
+
+  useEffect(setInputFocus, []);
+
   return (
     <>
-      <h1>Edit todo list item</h1>
-      <form onSubmit={handleSubmitForm}>
-        <input
-          type='text'
-          value={inputValue}
-          onChange={handleChangeInputValue}
-        />
-        <button type='submit'>Save</button>
-        <button type='button' onClick={handleCancelSubmit}>
-          Cancel
-        </button>
-      </form>
+      <Container>
+        <h1 className='text-center mb-5'>Edit todo list item</h1>
+        <Form
+          onSubmit={handleSubmitForm}
+          className='d-flex flex-column align-items-center'
+        >
+          <Form.Control
+            className='mb-3'
+            type='text'
+            size='lg'
+            ref={inputRef}
+            value={inputValue}
+            onChange={handleChangeInputValue}
+          />
+          <ButtonGroup>
+            <Button className='text-uppercase' type='submit' variant='primary'>
+              save
+            </Button>
+            <Button
+              className='text-uppercase'
+              type='button'
+              variant='danger'
+              onClick={handleCancelSubmit}
+            >
+              cancel
+            </Button>
+          </ButtonGroup>
+        </Form>
+      </Container>
     </>
   );
 }

@@ -1,19 +1,7 @@
 import * as types from './types';
 
 const initialValue = {
-  todoLists: [
-    {
-      id: 'test-todo-list-id',
-      text: 'test-todo-list-text',
-      items: [
-        {
-          id: 'test-todo-item-id',
-          text: 'test-todo-item-text',
-          completed: false,
-        },
-      ],
-    },
-  ],
+  todoLists: [],
 };
 
 export const reducer = (state = initialValue, { type, payload }) => {

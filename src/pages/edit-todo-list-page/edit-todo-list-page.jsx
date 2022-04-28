@@ -1,8 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addTodoListItem, removeTodoListItem } from '../../store/actions';
 import uniqid from 'uniqid';
+import {
+  Alert,
+  Button,
+  ButtonGroup,
+  Container,
+  Form,
+  ListGroup,
+} from 'react-bootstrap';
 
 function EditTodoListPage() {
   const { todoListID } = useParams();
@@ -16,6 +24,8 @@ function EditTodoListPage() {
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState('');
+
+  const inputRef = useRef();
 
   const handleChangeInputValue = (event) => {
     const { target } = event;
@@ -57,41 +67,76 @@ function EditTodoListPage() {
   const renderTodoList = () => {
     if (todoList.items.length) {
       return (
-        <ul>
+        <ListGroup>
           {todoList.items.map((todoListItem) => {
             return (
-              <li key={todoListItem.id}>
-                {todoListItem.text}
-                <button onClick={() => handleEditTodoListItem(todoListItem.id)}>
-                  edit
-                </button>
-                <button
-                  onClick={() => handleRemoveTodoListItem(todoListItem.id)}
-                >
-                  remove
-                </button>
-              </li>
+              <ListGroup.Item
+                key={todoListItem.id}
+                className='d-flex justify-content-between align-items-center px-2'
+              >
+                <span className='text-break me-2'>{todoListItem.text}</span>
+                <ButtonGroup>
+                  <Button
+                    variant='primary'
+                    onClick={() => handleEditTodoListItem(todoListItem.id)}
+                  >
+                    edit
+                  </Button>
+                  <Button
+                    variant='danger'
+                    onClick={() => handleRemoveTodoListItem(todoListItem.id)}
+                  >
+                    remove
+                  </Button>
+                </ButtonGroup>
+              </ListGroup.Item>
             );
           })}
-        </ul>
+        </ListGroup>
       );
     } else {
       return null;
     }
   };
 
+  const setInputFocus = () => {
+    inputRef.current.focus();
+  };
+
+  useRef(setInputFocus, []);
+
   return (
     <>
-      <h1>Edit todo list "{todoList.text}"</h1>
-      <form onSubmit={handleSubmitForm}>
-        <input
-          type='text'
-          value={inputValue}
-          onChange={handleChangeInputValue}
-        />
-        <button type='submit'>Add todo</button>
-      </form>
-      {renderTodoList()}
+      <Container>
+        <h1 className='text-center mb-5'>Edit todo list "{todoList.text}"</h1>
+        <Form
+          onSubmit={handleSubmitForm}
+          className='d-flex flex-column align-items-center mb-5'
+        >
+          <Form.Control
+            className='mb-3'
+            type='text'
+            placeholder='Enter new todo'
+            size='lg'
+            ref={inputRef}
+            value={inputValue}
+            onChange={handleChangeInputValue}
+          />
+          <Button
+            className='text-uppercase'
+            type='submit'
+            variant='primary'
+            size='lg'
+          >
+            Add todo
+          </Button>
+        </Form>
+        {todoList.items.length ? (
+          renderTodoList()
+        ) : (
+          <Alert variant='warning text-center'>Todo list is empty</Alert>
+        )}
+      </Container>
     </>
   );
 }

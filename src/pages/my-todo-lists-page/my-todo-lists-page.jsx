@@ -1,3 +1,10 @@
+import {
+  Alert,
+  Button,
+  ButtonGroup,
+  Container,
+  ListGroup,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeTodoList } from '../../store/actions';
@@ -17,26 +24,45 @@ function MyTodoListsPage() {
     navigate(`/edit-todo-list/${id}`);
   };
 
-  const todoListsRender = () => {
-    if (todoLists.length) {
-      return todoLists.map((todoList) => (
-        <li key={todoList.id}>
+  const renderTodoLists = () => (
+    <ListGroup>
+      {todoLists.map((todoList) => (
+        <ListGroup.Item
+          key={todoList.id}
+          className='px-2 d-flex justify-content-between align-items-center'
+        >
           {todoList.text}
-          <button onClick={() => handleEditTodoList(todoList.id)}>edit</button>
-          <button onClick={() => handleRemoveTodoList(todoList.id)}>
-            remove
-          </button>
-        </li>
-      ));
-    } else {
-      return <p>No todo lists</p>;
-    }
-  };
+          <ButtonGroup>
+            <Button
+              variant='primary'
+              onClick={() => handleEditTodoList(todoList.id)}
+            >
+              edit
+            </Button>
+            <Button
+              variant='danger'
+              onClick={() => handleRemoveTodoList(todoList.id)}
+            >
+              remove
+            </Button>
+          </ButtonGroup>
+        </ListGroup.Item>
+      ))}
+    </ListGroup>
+  );
 
   return (
     <>
-      <h1>My todo lists</h1>
-      {todoListsRender()}
+      <Container>
+        <h1 className='text-center mb-5'>My todo lists</h1>
+        {todoLists.length ? (
+          renderTodoLists()
+        ) : (
+          <Alert className='text-center' variant='warning'>
+            No todo lists
+          </Alert>
+        )}
+      </Container>
     </>
   );
 }

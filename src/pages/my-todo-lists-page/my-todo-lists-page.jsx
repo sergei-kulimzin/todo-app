@@ -1,13 +1,8 @@
-import {
-  Alert,
-  Button,
-  ButtonGroup,
-  Container,
-  ListGroup,
-} from 'react-bootstrap';
+import { Alert, Container, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeTodoList } from '../../store/actions';
+import ListItem from '../../components/list-item/list-item';
 
 function MyTodoListsPage() {
   const todoLists = useSelector((state) => state.todoLists);
@@ -27,26 +22,13 @@ function MyTodoListsPage() {
   const renderTodoLists = () => (
     <ListGroup>
       {todoLists.map((todoList) => (
-        <ListGroup.Item
+        <ListItem
           key={todoList.id}
-          className='px-2 d-flex justify-content-between align-items-center'
-        >
-          {todoList.text}
-          <ButtonGroup>
-            <Button
-              variant='primary'
-              onClick={() => handleEditTodoList(todoList.id)}
-            >
-              edit
-            </Button>
-            <Button
-              variant='danger'
-              onClick={() => handleRemoveTodoList(todoList.id)}
-            >
-              remove
-            </Button>
-          </ButtonGroup>
-        </ListGroup.Item>
+          id={todoList.id}
+          text={todoList.text}
+          handleEdit={handleEditTodoList}
+          handleRemove={handleRemoveTodoList}
+        />
       ))}
     </ListGroup>
   );

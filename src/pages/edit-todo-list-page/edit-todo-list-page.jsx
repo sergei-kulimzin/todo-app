@@ -3,14 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addTodoListItem, removeTodoListItem } from '../../store/actions';
 import uniqid from 'uniqid';
-import {
-  Alert,
-  Button,
-  ButtonGroup,
-  Container,
-  Form,
-  ListGroup,
-} from 'react-bootstrap';
+import { Alert, Button, Container, Form, ListGroup } from 'react-bootstrap';
+
+import ListItem from '../../components/list-item/list-item';
 
 function EditTodoListPage() {
   const { todoListID } = useParams();
@@ -70,26 +65,13 @@ function EditTodoListPage() {
         <ListGroup>
           {todoList.items.map((todoListItem) => {
             return (
-              <ListGroup.Item
+              <ListItem
                 key={todoListItem.id}
-                className='d-flex justify-content-between align-items-center px-2'
-              >
-                <span className='text-break me-2'>{todoListItem.text}</span>
-                <ButtonGroup>
-                  <Button
-                    variant='primary'
-                    onClick={() => handleEditTodoListItem(todoListItem.id)}
-                  >
-                    edit
-                  </Button>
-                  <Button
-                    variant='danger'
-                    onClick={() => handleRemoveTodoListItem(todoListItem.id)}
-                  >
-                    remove
-                  </Button>
-                </ButtonGroup>
-              </ListGroup.Item>
+                id={todoListItem.id}
+                text={todoListItem.text}
+                handleEdit={handleEditTodoListItem}
+                handleRemove={handleRemoveTodoListItem}
+              />
             );
           })}
         </ListGroup>

@@ -1,10 +1,18 @@
+import { Alert, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function NotFoundPage() {
   return (
     <>
-      <h1>Page not found</h1>
-      <Link to='/'>Go main page</Link>
+      <Container>
+        <Alert className='text-center' variant='danger'>
+          <Alert.Heading className='fs-1'>Page not found!</Alert.Heading>
+          <hr />
+          <Link className='alert-link' to='/'>
+            Go back main page
+          </Link>
+        </Alert>
+      </Container>
     </>
   );
 }

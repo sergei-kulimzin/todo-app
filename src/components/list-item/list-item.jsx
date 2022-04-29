@@ -1,6 +1,8 @@
 import { ListGroup, Button } from 'react-bootstrap';
-import { FaCheck, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import { FaCheck, FaPencilAlt, FaTrashAlt, FaEllipsisH } from 'react-icons/fa';
 import classNames from 'classnames';
+import { Offcanvas } from 'react-bootstrap';
+import { useState } from 'react';
 
 function ListItem({
   id,
@@ -10,6 +12,16 @@ function ListItem({
   handleEdit,
   handleRemove,
 }) {
+  const [isModalMenuShown, setIsModalMenuShown] = useState(false);
+
+  const handleShowModalMenu = () => {
+    setIsModalMenuShown(true);
+  };
+
+  const handleHideModalMenu = () => {
+    setIsModalMenuShown(false);
+  };
+
   const listItemClassNames = classNames(
     'px-2 d-flex justify-content-between align-items-center',
     { 'bg-success text-light': completed },
@@ -17,34 +29,62 @@ function ListItem({
   );
 
   return (
-    <ListGroup.Item className={listItemClassNames}>
-      <p className='fs-3 text-center text-break mb-0 me-2 w-100'>{text}</p>
-      <div className='d-flex flex-column align-items-center'>
-        {handleComplete ? (
+    <>
+      <Offcanvas
+        className='bg-light'
+        show={isModalMenuShown}
+        onHide={handleHideModalMenu}
+        placement='top'
+      >
+        <Offcanvas.Body className='d-flex flex-column justify-content-center'>
+          {handleComplete ? (
+            <Button
+              className='mb-2 bg-gradient d-flex justify-content-center align-items-center'
+              variant='success'
+              onClick={() => {
+                handleComplete(id);
+                handleHideModalMenu();
+              }}
+            >
+              <span className='fs-5 me-3 text-uppercase'>отметить</span>
+              <FaCheck className='fs-2' />
+            </Button>
+          ) : null}
           <Button
-            className='mb-2 bg-gradient'
-            variant='success'
-            onClick={() => handleComplete(id)}
+            className='mb-2 bg-gradient d-flex justify-content-center align-items-center'
+            variant='secondary'
+            onClick={() => {
+              handleEdit(id);
+              handleHideModalMenu();
+            }}
           >
-            <FaCheck className='fs-2' />
+            <span className='fs-5 me-3 text-uppercase'>редактировать</span>
+            <FaPencilAlt className='fs-2' />
           </Button>
-        ) : null}
+          <Button
+            className='bg-gradient d-flex justify-content-center align-items-center'
+            variant='danger'
+            onClick={() => {
+              handleRemove(id);
+              handleHideModalMenu();
+            }}
+          >
+            <span className='fs-5 me-3 text-uppercase'>удалить</span>
+            <FaTrashAlt className='fs-2' />
+          </Button>
+        </Offcanvas.Body>
+      </Offcanvas>
+      <ListGroup.Item className={listItemClassNames}>
+        <p className='fs-3 text-break mb-0 me-2 w-100'>{text}</p>
         <Button
-          className='mb-2 bg-gradient'
-          variant='secondary'
-          onClick={() => handleEdit(id)}
+          className='bg-gradient d-flex justify-content-center align-items-center'
+          variant='primary'
+          onClick={handleShowModalMenu}
         >
-          <FaPencilAlt className='fs-2' />
+          <FaEllipsisH />
         </Button>
-        <Button
-          className='bg-gradient'
-          variant='danger'
-          onClick={() => handleRemove(id)}
-        >
-          <FaTrashAlt className='fs-2' />
-        </Button>
-      </div>
-    </ListGroup.Item>
+      </ListGroup.Item>
+    </>
   );
 }
 

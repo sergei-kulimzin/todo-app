@@ -1,10 +1,17 @@
 import * as types from './types';
 
-const initialValue = {
-  todoLists: [],
+const initialValue = () => {
+  const localStorageState = localStorage.getItem('todo-app');
+  if (localStorageState) {
+    return JSON.parse(localStorageState);
+  } else {
+    return {
+      todoLists: [],
+    };
+  }
 };
 
-export const reducer = (state = initialValue, { type, payload }) => {
+export const reducer = (state = initialValue(), { type, payload }) => {
   switch (type) {
     case types.CREATE_TODO_LIST:
       const createTodoList = () => {

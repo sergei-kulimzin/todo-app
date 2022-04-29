@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   addTodoListItem,
@@ -10,13 +10,14 @@ import uniqid from 'uniqid';
 import { Alert, Button, Container, Form, ListGroup } from 'react-bootstrap';
 
 import ListItem from '../../components/list-item/list-item';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 function EditTodoListPage() {
   const { todoListID } = useParams();
 
   const navigate = useNavigate();
 
-  const todoList = useSelector((state) => {
+  const todoList = useLocalStorage((state) => {
     return state.todoLists.find((todoList) => todoList.id === todoListID);
   });
 

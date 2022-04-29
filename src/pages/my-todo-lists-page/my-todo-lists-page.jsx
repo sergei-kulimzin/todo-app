@@ -1,11 +1,12 @@
 import { Alert, Container, ListGroup } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeTodoList } from '../../store/actions';
 import ListItem from '../../components/list-item/list-item';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 function MyTodoListsPage() {
-  const todoLists = useSelector((state) => state.todoLists);
+  const todoLists = useLocalStorage((state) => state.todoLists);
 
   const dispatch = useDispatch();
 

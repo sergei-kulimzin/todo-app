@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, ButtonGroup, Container, Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { editTodoListItem } from '../../store/actions';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 function EditTodoListItemPage() {
   const { todoListID, itemID } = useParams();
 
   const navigate = useNavigate();
 
-  const todoListItem = useSelector((state) => {
+  const todoListItem = useLocalStorage((state) => {
     const todoList = state.todoLists.find(
       (todoList) => todoList.id === todoListID
     );

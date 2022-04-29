@@ -75,7 +75,7 @@ function EditTodoListPage() {
   const renderTodoList = () => {
     if (todoList.items.length) {
       return (
-        <ListGroup>
+        <ListGroup className='bg-ligth'>
           {todoList.items.map((todoListItem) => {
             return (
               <ListItem

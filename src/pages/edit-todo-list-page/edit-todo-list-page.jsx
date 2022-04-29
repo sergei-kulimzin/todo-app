@@ -1,7 +1,11 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addTodoListItem, removeTodoListItem } from '../../store/actions';
+import {
+  addTodoListItem,
+  removeTodoListItem,
+  toggleCompleteTodoListItem,
+} from '../../store/actions';
 import uniqid from 'uniqid';
 import { Alert, Button, Container, Form, ListGroup } from 'react-bootstrap';
 
@@ -59,6 +63,15 @@ function EditTodoListPage() {
     navigate(`/edit-todo-list-item/${todoListID}/${id}`);
   };
 
+  const handleToggleCompleteTodoListItem = (id) => {
+    dispatch(
+      toggleCompleteTodoListItem({
+        todoListID,
+        itemID: id,
+      })
+    );
+  };
+
   const renderTodoList = () => {
     if (todoList.items.length) {
       return (
@@ -69,8 +82,10 @@ function EditTodoListPage() {
                 key={todoListItem.id}
                 id={todoListItem.id}
                 text={todoListItem.text}
+                completed={todoListItem.completed}
                 handleEdit={handleEditTodoListItem}
                 handleRemove={handleRemoveTodoListItem}
+                handleComplete={handleToggleCompleteTodoListItem}
               />
             );
           })}

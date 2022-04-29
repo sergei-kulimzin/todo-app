@@ -1,7 +1,14 @@
 import { ListGroup, Button } from 'react-bootstrap';
 import { FaCheck, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
-function ListItem({ id, text, handleComplete, handleEdit, handleRemove }) {
+function ListItem({
+  id,
+  text,
+  completed,
+  handleComplete,
+  handleEdit,
+  handleRemove,
+}) {
   return (
     <ListGroup.Item className='px-2 d-flex flex-column justify-content-between align-items-center'>
       <p className='text-break mb-0 w-100'>{text}</p>

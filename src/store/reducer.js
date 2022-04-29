@@ -94,6 +94,35 @@ export const reducer = (state = initialValue, { type, payload }) => {
       };
       return editTodoListItem();
 
+    case types.TOGGLE_COMPLETE_TODO_LIST_ITEM:
+      const toggleCompleteTodoListItem = () => {
+        const currentTodolist = state.todoLists.find(
+          (todolist) => todolist.id === payload.todoListID
+        );
+        const currentItem = currentTodolist.items.find(
+          (item) => item.id === payload.itemID
+        );
+        const newItem = { ...currentItem, completed: !currentItem.completed };
+        const newItems = currentTodolist.items.map((item) => {
+          if (item.id === payload.itemID) {
+            return newItem;
+          } else {
+            return item;
+          }
+        });
+        const newTodoList = { ...currentTodolist, items: newItems };
+        const newTodoLists = state.todoLists.map((todoList) => {
+          if (todoList.id === payload.todoListID) {
+            return newTodoList;
+          } else {
+            return todoList;
+          }
+        });
+        const newState = { ...state, todoLists: newTodoLists };
+        return newState;
+      };
+      return toggleCompleteTodoListItem();
+
     default:
       return state;
   }

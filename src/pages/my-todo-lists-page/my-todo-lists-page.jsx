@@ -36,12 +36,12 @@ function MyTodoListsPage() {
   return (
     <>
       <Container>
-        <h1 className='text-center mb-5'>My todo lists</h1>
+        <h1 className='text-center mb-5'>Мои списки</h1>
         {todoLists.length ? (
           renderTodoLists()
         ) : (
           <Alert className='text-center' variant='warning'>
-            No todo lists
+            Нет списков
           </Alert>
         )}
       </Container>

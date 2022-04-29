@@ -48,7 +48,7 @@ function CreateTodoListPage() {
   return (
     <>
       <Container>
-        <h1 className='text-center mb-5'>Create todo list</h1>
+        <h1 className='text-center mb-5'>Создать список</h1>
         <Form
           onSubmit={handleSubmitForm}
           className='d-flex flex-column align-items-center'
@@ -56,7 +56,7 @@ function CreateTodoListPage() {
           <Form.Control
             className='mb-3'
             type='text'
-            placeholder='Enter name for the new todo list'
+            placeholder='Введите название списка'
             size='lg'
             ref={inputRef}
             value={inputValue}
@@ -68,7 +68,7 @@ function CreateTodoListPage() {
             variant='primary'
             size='lg'
           >
-            create
+            создать
           </Button>
         </Form>
       </Container>

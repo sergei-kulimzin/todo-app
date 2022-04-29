@@ -6,10 +6,10 @@ function NotFoundPage() {
     <>
       <Container>
         <Alert className='text-center' variant='danger'>
-          <Alert.Heading className='fs-1'>Page not found!</Alert.Heading>
+          <Alert.Heading className='fs-1'>Страница не найдена!</Alert.Heading>
           <hr />
           <Link className='alert-link' to='/'>
-            Go back main page
+            Вернуться на главную страницу
           </Link>
         </Alert>
       </Container>

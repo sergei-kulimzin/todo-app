@@ -105,7 +105,9 @@ function EditTodoListPage() {
   return (
     <>
       <Container>
-        <h1 className='text-center mb-5'>Edit todo list "{todoList.text}"</h1>
+        <h1 className='text-center mb-5'>
+          Редактировать список "{todoList.text}"
+        </h1>
         <Form
           onSubmit={handleSubmitForm}
           className='d-flex flex-column align-items-center mb-5'
@@ -113,7 +115,7 @@ function EditTodoListPage() {
           <Form.Control
             className='mb-3'
             type='text'
-            placeholder='Enter new todo'
+            placeholder='Введите название пункта'
             size='lg'
             ref={inputRef}
             value={inputValue}
@@ -125,13 +127,13 @@ function EditTodoListPage() {
             variant='primary'
             size='lg'
           >
-            Add todo
+            Добавить пункт
           </Button>
         </Form>
         {todoList.items.length ? (
           renderTodoList()
         ) : (
-          <Alert variant='warning text-center'>Todo list is empty</Alert>
+          <Alert variant='warning text-center'>Список пуст</Alert>
         )}
       </Container>
     </>

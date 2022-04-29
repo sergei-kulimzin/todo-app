@@ -57,7 +57,7 @@ function EditTodoListItemPage() {
   return (
     <>
       <Container>
-        <h1 className='text-center mb-5'>Edit todo list item</h1>
+        <h1 className='text-center mb-5'>Редактировать пункт</h1>
         <Form
           onSubmit={handleSubmitForm}
           className='d-flex flex-column align-items-center'
@@ -72,7 +72,7 @@ function EditTodoListItemPage() {
           />
           <ButtonGroup>
             <Button className='text-uppercase' type='submit' variant='primary'>
-              save
+              сохранить
             </Button>
             <Button
               className='text-uppercase'
@@ -80,7 +80,7 @@ function EditTodoListItemPage() {
               variant='danger'
               onClick={handleCancelSubmit}
             >
-              cancel
+              отменить
             </Button>
           </ButtonGroup>
         </Form>

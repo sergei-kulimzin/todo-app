@@ -8,12 +8,12 @@ const navLinks = [
   {
     id: uniqid('nav-link-id-'),
     href: '/',
-    content: 'create todo list',
+    content: 'Создать список',
   },
   {
     id: uniqid('nav-link-id-'),
     href: '/my-todo-lists',
-    content: 'my todo lists',
+    content: 'Мои списки',
   },
 ];
 
@@ -60,7 +60,7 @@ function PageHeader() {
             onHide={handleHideNavMenu}
           >
             <Offcanvas.Header closeButton closeVariant='white'>
-              <Offcanvas.Title className='text-secondary'>Menu</Offcanvas.Title>
+              <Offcanvas.Title className='text-secondary'>Меню</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav>{renderNavList()}</Nav>

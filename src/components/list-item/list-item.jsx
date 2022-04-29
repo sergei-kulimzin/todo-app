@@ -19,7 +19,6 @@ function ListItem({
   return (
     <ListGroup.Item className={listItemClassNames}>
       <p className='fs-3 text-center text-break mb-0 me-2 w-100'>{text}</p>
-      {/* <hr className='w-100 my-2' /> */}
       <div className='d-flex flex-column align-items-center'>
         {handleComplete ? (
           <Button

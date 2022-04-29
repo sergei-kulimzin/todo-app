@@ -17,7 +17,7 @@ function MyTodoListsPage() {
   };
 
   const handleEditTodoList = (id) => {
-    navigate(`/edit-todo-list/${id}`);
+    navigate(`/todo-app/edit-todo-list/${id}`);
   };
 
   const renderTodoLists = () => (

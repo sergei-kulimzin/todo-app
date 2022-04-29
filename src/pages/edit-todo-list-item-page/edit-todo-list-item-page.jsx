@@ -40,13 +40,13 @@ function EditTodoListItemPage() {
           text: cleanInputValue,
         })
       );
-      navigate(`/edit-todo-list/${todoListID}`);
+      navigate(`/todo-app/edit-todo-list/${todoListID}`);
     }
     setInputValue('');
   };
 
   const handleCancelSubmit = () => {
-    navigate(`/edit-todo-list/${todoListID}`);
+    navigate(`/todo-app/edit-todo-list/${todoListID}`);
   };
 
   const setInputFocus = () => {

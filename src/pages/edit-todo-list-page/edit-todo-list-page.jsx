@@ -61,7 +61,7 @@ function EditTodoListPage() {
   };
 
   const handleEditTodoListItem = (id) => {
-    navigate(`/edit-todo-list-item/${todoListID}/${id}`);
+    navigate(`/todo-app/edit-todo-list-item/${todoListID}/${id}`);
   };
 
   const handleToggleCompleteTodoListItem = (id) => {

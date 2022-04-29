@@ -1,5 +1,6 @@
 import { ListGroup, Button } from 'react-bootstrap';
 import { FaCheck, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import classNames from 'classnames';
 
 function ListItem({
   id,
@@ -9,14 +10,20 @@ function ListItem({
   handleEdit,
   handleRemove,
 }) {
+  const listItemClassNames = classNames(
+    'px-2 d-flex justify-content-between align-items-center',
+    { 'bg-success text-light': completed },
+    { 'bg-primary bg-opacity-25': !completed }
+  );
+
   return (
-    <ListGroup.Item className='px-2 d-flex flex-column justify-content-between align-items-center'>
-      <p className='text-break mb-0 w-100'>{text}</p>
-      <hr className='w-100 my-2' />
-      <div>
+    <ListGroup.Item className={listItemClassNames}>
+      <p className='fs-3 text-center text-break mb-0 me-2 w-100'>{text}</p>
+      {/* <hr className='w-100 my-2' /> */}
+      <div className='d-flex flex-column align-items-center'>
         {handleComplete ? (
           <Button
-            className='me-2'
+            className='mb-2 bg-gradient'
             variant='success'
             onClick={() => handleComplete(id)}
           >
@@ -24,13 +31,17 @@ function ListItem({
           </Button>
         ) : null}
         <Button
-          className='me-2'
+          className='mb-2 bg-gradient'
           variant='secondary'
           onClick={() => handleEdit(id)}
         >
           <FaPencilAlt className='fs-2' />
         </Button>
-        <Button variant='danger' onClick={() => handleRemove(id)}>
+        <Button
+          className='bg-gradient'
+          variant='danger'
+          onClick={() => handleRemove(id)}
+        >
           <FaTrashAlt className='fs-2' />
         </Button>
       </div>

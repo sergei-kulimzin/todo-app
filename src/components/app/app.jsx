@@ -10,7 +10,7 @@ import EditTodoListItemPage from '../../pages/edit-todo-list-item-page/edit-todo
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route path='/todo-app' element={<Layout />}>
         <Route index element={<CreateTodoListPage />} />
         <Route
           path='edit-todo-list/:todoListID'

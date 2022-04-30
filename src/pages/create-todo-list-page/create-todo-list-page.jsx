@@ -34,7 +34,7 @@ function CreateTodoListPage() {
           todoList,
         })
       );
-      navigate(`/todo-app/edit-todo-list/${todoListID}`);
+      navigate(`/edit-todo-list/${todoListID}`);
     }
     setInputValue('');
   };

@@ -7,12 +7,12 @@ import uniqid from 'uniqid';
 const navLinks = [
   {
     id: uniqid('nav-link-id-'),
-    href: '/todo-app',
+    href: '/',
     content: 'Создать список',
   },
   {
     id: uniqid('nav-link-id-'),
-    href: '/todo-app/my-todo-lists',
+    href: '/my-todo-lists',
     content: 'Мои списки',
   },
 ];

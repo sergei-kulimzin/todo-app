@@ -49,7 +49,7 @@ function PageHeader() {
     <header className='bg-dark'>
       <Container fluid='md'>
         <Navbar expand={false} variant='dark' bg='dark'>
-          <Link to='/todo-app'>
+          <Link to='/'>
             <BsClipboardCheck className='text-light fs-1' />
           </Link>
           <Navbar.Toggle onClick={handleShowNavMenu} />

@@ -1,7 +1,6 @@
-import { ListGroup, Button } from 'react-bootstrap';
+import { ListGroup, Button, Modal } from 'react-bootstrap';
 import { FaCheck, FaPencilAlt, FaTrashAlt, FaEllipsisH } from 'react-icons/fa';
 import classNames from 'classnames';
-import { Offcanvas } from 'react-bootstrap';
 import { useState } from 'react';
 
 function ListItem({
@@ -30,13 +29,14 @@ function ListItem({
 
   return (
     <>
-      <Offcanvas
-        className='bg-light'
+      <Modal
+        className='d-flex flex-column justify-content-center align-items-center'
+        animation={false}
         show={isModalMenuShown}
         onHide={handleHideModalMenu}
-        placement='top'
       >
-        <Offcanvas.Body className='d-flex flex-column justify-content-center'>
+        <Modal.Header closeButton />
+        <Modal.Body className='d-flex flex-column justify-content-center'>
           {handleComplete ? (
             <Button
               className='mb-2 bg-gradient d-flex justify-content-center align-items-center'
@@ -72,8 +72,8 @@ function ListItem({
             <span className='fs-5 me-3 text-uppercase'>удалить</span>
             <FaTrashAlt className='fs-2' />
           </Button>
-        </Offcanvas.Body>
-      </Offcanvas>
+        </Modal.Body>
+      </Modal>
       <ListGroup.Item className={listItemClassNames}>
         <p className='fs-3 text-break mb-0 me-2 w-100'>{text}</p>
         <Button

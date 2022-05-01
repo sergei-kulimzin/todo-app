@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
@@ -47,6 +48,9 @@ function CreateTodoListPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Создать список</title>
+      </Helmet>
       <Container>
         <h1 className='text-center mb-5'>Создать список</h1>
         <Form

@@ -11,6 +11,7 @@ import { Alert, Button, Container, Form, ListGroup } from 'react-bootstrap';
 
 import ListItem from '../../components/list-item/list-item';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Helmet } from 'react-helmet';
 
 function EditTodoListPage() {
   const { todoListID } = useParams();
@@ -105,6 +106,9 @@ function EditTodoListPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Редактировать список "{todoList.text}"</title>
+      </Helmet>
       <Container>
         <h1 className='text-center mb-5'>
           Редактировать список "{todoList.text}"

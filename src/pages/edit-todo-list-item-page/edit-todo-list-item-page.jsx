@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { editTodoListItem } from '../../store/actions';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Helmet } from 'react-helmet';
 
 function EditTodoListItemPage() {
   const { todoListID, itemID } = useParams();
@@ -57,6 +58,9 @@ function EditTodoListItemPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Редактировать пункт</title>
+      </Helmet>
       <Container>
         <h1 className='text-center mb-5'>Редактировать пункт</h1>
         <Form

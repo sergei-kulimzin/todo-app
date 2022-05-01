@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { removeTodoList } from '../../store/actions';
 import ListItem from '../../components/list-item/list-item';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Helmet } from 'react-helmet';
 
 function MyTodoListsPage() {
   const todoLists = useLocalStorage((state) => state.todoLists);
@@ -36,6 +37,9 @@ function MyTodoListsPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Мои списки</title>
+      </Helmet>
       <Container>
         <h1 className='text-center mb-5'>Мои списки</h1>
         {todoLists.length ? (
